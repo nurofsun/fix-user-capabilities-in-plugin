@@ -4,7 +4,7 @@ It's because pluggable.php haven't been loaded and when you call this `current_u
 
 so, if you want to fix this problem,just wrap this `current_user_can` on a function use hook such as `plugins_loaded` or `init`
 
-Follow me on [https://twitter.com/noorofsun]('Twitter')
+Follow me on [Twitter](https://twitter.com/noorofsun)
 
 
 
