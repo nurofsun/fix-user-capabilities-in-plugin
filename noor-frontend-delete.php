@@ -8,7 +8,7 @@
  * License: GPL2
  *
  *
- * @info fixed version current_user_can function undefined
+ * @info fixed current_user_can function undefined
  */
 function noor_generate_delete_link($content)
 {
@@ -55,4 +55,26 @@ function noor_delete_post()
 		}
 	}
 }
-add_action('plugins_loaded','noor_delete_post');
+add_action('init','noor_delete_post');
+
+// register activation hook
+function noor_frontend_delete_activated() {
+	noor_delete_post();
+}
+register_activation_hook(__FILE__,'noor_frontend_delete_activated');
+
+
+function noor_remove_delete_link($content) {
+	return $content;
+}
+add_filter('the_content','noor_remove_delete_link');
+//
+function noor_frontend_delete_deactivated()
+{
+	remove_query_arg(
+		['action','post'],
+		home_url()
+	);
+	noor_remove_delete_link($content);
+}
+register_deactivation_hook(__FILE__,'noor_frontend_delete_deactivated');
